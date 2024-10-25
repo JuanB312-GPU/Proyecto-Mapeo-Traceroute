@@ -9,6 +9,8 @@ Este proyecto permite mapear trazas de IPs o dispositivos en un mapa interactivo
 - **Flask para Backend**: El proyecto usa Flask para servir la aplicación web y manejar las solicitudes.
 - **Cargar trazas**: Los datos de trazas pueden ser cargados desde un archivo o a través de una API.
 
+![Mapa de Trazas](resources/recurso.png)
+
 ## Requisitos Previos
 
 Asegúrate de tener instalados los siguientes paquetes antes de comenzar:
