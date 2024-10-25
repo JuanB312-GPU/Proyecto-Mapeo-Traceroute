@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Bienvenido al rastreador</title>
+      <style>
+      #map-iframe {
+            width: 80%;   /* Ajusta el ancho del iframe */
+            height: 300px; /* Ajusta la altura del iframe */
+            border: none;  /* Elimina bordes si lo deseas */
+            margin: auto;  /* Centrar el iframe */
+            display: block;
+        }
+      .info-dinamica {
+                width: 22%; /* Ajusta el ancho del cuadro de texto */
+                padding: 10px;
+                background-color: #f7d7c4;
+                color: #333;
+                font-size: 1.2em;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin-left: 10px;
+                margin-top: 25px;
+                text-align: left;
+            }
+        .boton {
+                padding: 10px 20px;
+                font-size: 14px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-right: 10px;
+                font-family: 'Roboto', sans-serif;
+            }
+      .contenedor {
+                width: 90%;
+                margin: 0 auto;
+                text-align: center; 
+                border: 2px solid rgba(0, 0, 0, 0);  
+                padding: 20px; 
+            }
+       .contenido-flex {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start; 
+                margin-top: 20px; 
+            }
+        body {
+          background-color:#e39570;
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: auto;
+        }
+        h1 {
+          color: #da4e30;
+          font-size: 4em;
+          margin-bottom: 20px;
+        }
+
+        p {
+          color: #da4e30;
+          font-size: 2.5em;
+      
+        }
+      </style>
+    </head>
+    <body>
+      <div class="contenedor">
+         <h1>Bienvenido Ingrese los Datos</h1>
+         <div class="contenedor">
+             <form action="" method="post">
+                <label for="Server">Servidor de salida</label>
+                <select id="Server" name="Server">
+                {% for opcion in options_sever %}
+                    <option value="{{ opcion }}">{{ opcion }}</option>
+                {% endfor %}
+                </select>
+                <label for="Website">Sitio Web</label>
+                <select id="Website" name="Website">
+                {% for opcion in options_web %}
+                    <option value="{{ opcion }}">{{ opcion }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Trazar">
+                <br><br>
+             </form>
+             <div class="contenido-flex">
+                <iframe id="map-iframe" src="http://127.0.0.1:5000/mapa"></iframe>
+                 <div class="info-dinamica">
+                    <ul style="font-size: 11px;" >
+                    <li><strong>IP inicial:</strong> {{ initial_ip }}</li>
+                    <li><strong>IP final:</strong> {{ final_ip }}</li>
+                    <li><strong>Estado:</strong> {{ country }}</li>
+                    <li><strong># de saltos:</strong> {{ num_hops }}</li>
+                    <li><strong>Tiempo promedio (ms):</strong> {{ time }}</li>
+                    <li><strong>Saltos:</strong>
+                    <ul>
+                      {% for hop in hops %}
+                         <li>{{ hop }}</li>
+                      {% endfor %}
+                    </ul>
+                 </div>
+             </div>
+             <p> {{ message }} </p>
+         </div>
+      </div>
+    </body>
+</html>
