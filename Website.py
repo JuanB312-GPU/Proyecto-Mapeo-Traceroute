@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, render_template_string
 import folium as maps
 from folium.plugins import MarkerCluster
 import pandas as pd
@@ -138,7 +138,9 @@ app = Flask(__name__)
 
 @app.route('/mapa')
 def map_html():
-    return render_template('mapa.html') 
+    with open("templates/mapa.html", "r", encoding="utf-8") as f:
+        mapa_html = f.read()
+    return render_template_string(mapa_html)
 
 @app.route('/inicio', methods = ['GET','POST'])
 def initial():
@@ -160,7 +162,8 @@ def initial():
                            final_ip=info['final_ip'], 
                            country=info['country'], 
                            time=info['time'], 
-                           hops=info['hops'])
+                           hops=info['hops']
+                           )
     
     # Salida del sitio web en su forma base.
     return render_template('index.html', options_sever = servers_list , options_web = websites_list, message = message) 
